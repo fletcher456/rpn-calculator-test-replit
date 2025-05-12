@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CalculatorDisplay from "./CalculatorDisplay";
 import CalculatorButton from "./CalculatorButton";
 import { useCalculator } from "@/lib/calculator";
+import { keyMatrix, getKeyAction } from "@/lib/keyMatrix";
 
 export default function Calculator() {
   const {
@@ -9,7 +10,6 @@ export default function Calculator() {
     currentEntry,
     isEnteringNumber,
     shiftState,
-    memory,
     handleNumber,
     handleEnter,
     handleOperation,
@@ -48,6 +48,55 @@ export default function Calculator() {
     setIsOn(!isOn);
   };
 
+  // Handle key actions based on the action string
+  const handleKeyAction = (action: string) => {
+    if (action.startsWith("number-")) {
+      const digit = action.split("-")[1];
+      handleNumber(digit);
+    } else if (action === "decimal-point") {
+      handleNumber(".");
+    } else {
+      // Handle all other actions
+      switch (action) {
+        case "shift-f": handleShift("f"); break;
+        case "shift-g": handleShift("g"); break;
+        case "enter": handleEnter(); break;
+        case "store": handleStore(); break;
+        case "recall": handleRecall(); break;
+        case "sin": handleSin(); break;
+        case "arcsin": handleArcSin(); break;
+        case "cos": handleCos(); break;
+        case "arccos": handleArcCos(); break;
+        case "tan": handleTan(); break;
+        case "arctan": handleArcTan(); break;
+        case "sqrt": handleSquareRoot(); break;
+        case "square": handleSquare(); break;
+        case "chs": handleChangeSign(); break;
+        case "clear-x": handleClearX(); break;
+        case "exp": handleExp(); break;
+        case "ln": handleLn(); break;
+        case "power10": handlePower10(); break;
+        case "log": handleLog(); break;
+        case "roll-down": handleRollDown(); break;
+        case "roll-up": handleRollUp(); break;
+        case "swap-xy": handleSwapXY(); break;
+        case "pi": handlePi(); break;
+        case "divide": handleOperation("divide"); break;
+        case "multiply": handleOperation("multiply"); break;
+        case "subtract": handleOperation("subtract"); break;
+        case "add": handleOperation("add"); break;
+        case "reciprocal": handleReciprocal(); break;
+        case "percentage": handlePercentage(); break;
+        case "y-to-x": handleYtoX(); break;
+        case "eex": handleEEX(); break;
+        case "sst":
+        case "gto":
+          // These are placeholder actions for now
+          break;
+      }
+    }
+  };
+
   return (
     <div className="calculator-wrapper max-w-md w-full mx-auto">
       <div className="calculator-body bg-[hsl(var(--calculator-body))] rounded-xl shadow-2xl p-4 pb-6">
@@ -81,134 +130,23 @@ export default function Calculator() {
         
         {/* Calculator Keypad */}
         <div className={`calculator-keypad grid grid-cols-5 gap-2 sm:gap-3 ${!isOn ? 'opacity-50 pointer-events-none' : ''}`}>
-          {/* Row 1: Special functions / Top row */}
-          <CalculatorButton color="special" onClick={() => handleShift('f')}>
-            <span className="key-label font-buttons font-bold">f</span>
-          </CalculatorButton>
-          <CalculatorButton color="special" onClick={() => handleShift('g')}>
-            <span className="key-label font-buttons font-bold">g</span>
-          </CalculatorButton>
-          <CalculatorButton color="special" onClick={handleStore}>
-            <span className="key-label font-buttons">STO</span>
-          </CalculatorButton>
-          <CalculatorButton color="special" onClick={handleRecall}>
-            <span className="key-label font-buttons">RCL</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={handleEnter}>
-            <span className="key-label font-buttons">ENTER↑</span>
-          </CalculatorButton>
-          
-          {/* Row 2: Scientific functions */}
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleArcSin : handleSin}>
-            <span className="key-label font-buttons">sin</span>
-            <span className="key-sublabel text-gray-300">sin⁻¹</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleArcCos : handleCos}>
-            <span className="key-label font-buttons">cos</span>
-            <span className="key-sublabel text-gray-300">cos⁻¹</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleArcTan : handleTan}>
-            <span className="key-label font-buttons">tan</span>
-            <span className="key-sublabel text-gray-300">tan⁻¹</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleSquare : handleSquareRoot}>
-            <span className="key-label font-buttons">√x</span>
-            <span className="key-sublabel text-gray-300">x²</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={shiftState === 'g' ? handleClearX : handleChangeSign}>
-            <span className="key-label font-buttons">CHS</span>
-            <span className="key-sublabel text-gray-300">CLx</span>
-          </CalculatorButton>
-          
-          {/* Row 3: More scientific functions */}
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleLn : handleExp}>
-            <span className="key-label font-buttons">eˣ</span>
-            <span className="key-sublabel text-gray-300">ln</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleLog : handlePower10}>
-            <span className="key-label font-buttons">10ˣ</span>
-            <span className="key-sublabel text-gray-300">log</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handleRollUp : handleRollDown}>
-            <span className="key-label font-buttons">R↓</span>
-            <span className="key-sublabel text-gray-300">R↑</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handlePi : handleSwapXY}>
-            <span className="key-label font-buttons">x⇄y</span>
-            <span className="key-sublabel text-gray-300">π</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={() => handleOperation('divide')}>
-            <span className="key-label font-buttons">÷</span>
-          </CalculatorButton>
-          
-          {/* Row 4: Numeric keys and operations */}
-          <CalculatorButton color="numeric" onClick={() => handleNumber('7')}>
-            <span className="key-label font-buttons font-bold">7</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('8')}>
-            <span className="key-label font-buttons font-bold">8</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('9')}>
-            <span className="key-label font-buttons font-bold">9</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? handlePercentage : handleReciprocal}>
-            <span className="key-label font-buttons">1/x</span>
-            <span className="key-sublabel text-gray-300">%</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={() => handleOperation('multiply')}>
-            <span className="key-label font-buttons">×</span>
-          </CalculatorButton>
-          
-          {/* Row 5: More numeric keys and operations */}
-          <CalculatorButton color="numeric" onClick={() => handleNumber('4')}>
-            <span className="key-label font-buttons font-bold">4</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('5')}>
-            <span className="key-label font-buttons font-bold">5</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('6')}>
-            <span className="key-label font-buttons font-bold">6</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={shiftState === 'g' ? () => {} : handleYtoX}>
-            <span className="key-label font-buttons">yˣ</span>
-            <span className="key-sublabel text-gray-300">Δ%</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={() => handleOperation('subtract')}>
-            <span className="key-label font-buttons">−</span>
-          </CalculatorButton>
-          
-          {/* Row 6: Bottom row */}
-          <CalculatorButton color="numeric" onClick={() => handleNumber('1')}>
-            <span className="key-label font-buttons font-bold">1</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('2')}>
-            <span className="key-label font-buttons font-bold">2</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('3')}>
-            <span className="key-label font-buttons font-bold">3</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={handleEEX}>
-            <span className="key-label font-buttons">EEX</span>
-            <span className="key-sublabel text-gray-300">P/R</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={() => handleOperation('add')}>
-            <span className="key-label font-buttons">+</span>
-          </CalculatorButton>
-          
-          {/* Row 7: Bottom row */}
-          <CalculatorButton color="numeric" onClick={() => handleNumber('0')} className="col-span-2">
-            <span className="key-label font-buttons font-bold">0</span>
-          </CalculatorButton>
-          <CalculatorButton color="numeric" onClick={() => handleNumber('.')}>
-            <span className="key-label font-buttons font-bold">.</span>
-          </CalculatorButton>
-          <CalculatorButton color="function" onClick={() => {}}>
-            <span className="key-label font-buttons">SST</span>
-            <span className="key-sublabel text-gray-300">BST</span>
-          </CalculatorButton>
-          <CalculatorButton color="operation" onClick={() => {}}>
-            <span className="key-label font-buttons">GTO</span>
-          </CalculatorButton>
+          {/* Render keys from the keyMatrix */}
+          {keyMatrix.map((row, rowIndex) => (
+            // Map each row
+            row.map((key, keyIndex) => (
+              <CalculatorButton
+                key={`${rowIndex}-${keyIndex}`}
+                color={key.color}
+                onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
+                className={key.width ? `col-span-${key.width}` : ""}
+              >
+                <span className="key-label font-buttons font-bold">{key.label}</span>
+                {key.subLabel && (
+                  <span className="key-sublabel text-gray-300">{key.subLabel}</span>
+                )}
+              </CalculatorButton>
+            ))
+          ))}
         </div>
       </div>
       
