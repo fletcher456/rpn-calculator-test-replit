@@ -1,12 +1,12 @@
 # HP 29C RPN Calculator
 
-A faithful web-based recreation of the HP 29C RPN calculator with scientific functions and stack operations.
+A not-yet-faithful web-based recreation of the HP 29C RPN calculator with scientific functions and stack operations. I'm using this project to learn more about vibe coding.
 
-![HP 29C Calculator](https://upload.wikimedia.org/wikipedia/commons/7/7d/HP-29C_Calculator.jpg)
+
 
 ## About the HP-29C
 
-The HP-29C was a programmable scientific calculator introduced by Hewlett-Packard in 1977. It used Reverse Polish Notation (RPN) for calculations, which eliminates the need for parentheses when entering complex expressions.
+The HP-29C is a programmable scientific calculator. the product line that contains the 29C may well have been introduced by Hewlett-Packard in 1977, but I don't know. It uses Reverse Polish Notation (RPN) for calculations, which is cool and lends itself well to writing short programs.
 
 ## Features
 
@@ -15,7 +15,7 @@ The HP-29C was a programmable scientific calculator introduced by Hewlett-Packar
 - Scientific functions (trigonometric, logarithmic, exponential)
 - Memory operations
 - Shift keys for alternate functions
-- Realistic styling matching the original HP 29C
+- Realistic styling matching the original HP 29C 😜
 
 ## Getting Started
 
@@ -140,3 +140,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Hewlett-Packard for the original HP-29C calculator
 - The RPN calculator community for inspiration and technical details
+- LLMs for really getting that Your Plastic Pal Who's Fun To Be With vibe
