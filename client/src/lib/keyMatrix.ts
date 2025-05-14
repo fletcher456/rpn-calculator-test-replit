@@ -77,6 +77,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "",
       color: "operation",
       action: "enter",
+      width: 2
     },
     {
       label: "CHS",
@@ -98,8 +99,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "DEG",
       color: "operation",
       action: "clear-x",
-    },
-    { label: "", color: "function", action: "none" }, // Empty placeholder to keep 5 columns
+    }
   ],
 
   // Row 4: Fourth row
@@ -110,6 +110,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x<0",
       color: "operation",
       action: "subtract",
+      width: 1.25
     },
     {
       label: "7",
@@ -117,6 +118,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "eˣ",
       color: "numeric",
       action: "number-7",
+      width: 1.25
     },
     {
       label: "8",
@@ -124,6 +126,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "10ˣ",
       color: "numeric",
       action: "number-8",
+      width: 1.25
     },
     {
       label: "9",
@@ -131,6 +134,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "→P",
       color: "numeric",
       action: "number-9",
+      width: 1.25
     },
   ],
 
@@ -142,6 +146,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x>0",
       color: "operation",
       action: "add",
+      width: 1.25
     },
     {
       label: "4",
@@ -149,6 +154,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "sin⁻¹",
       color: "numeric",
       action: "number-4",
+      width: 1.25
     },
     {
       label: "5",
@@ -156,6 +162,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "cos⁻¹",
       color: "numeric",
       action: "number-5",
+      width: 1.25
     },
     {
       label: "6",
@@ -163,6 +170,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "tan⁻¹",
       color: "numeric",
       action: "number-6",
+      width: 1.25
     },
   ],
 
@@ -174,6 +182,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x≠0",
       color: "operation",
       action: "multiply",
+      width: 1.25
     },
     {
       label: "1",
@@ -181,6 +190,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "FRAC",
       color: "numeric",
       action: "number-1",
+      width: 1.25
     },
     {
       label: "2",
@@ -188,6 +198,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x²",
       color: "numeric",
       action: "number-2",
+      width: 1.25
     },
     {
       label: "3",
@@ -195,6 +206,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "ABS",
       color: "numeric",
       action: "number-3",
+      width: 1.25
     },
   ],
 
@@ -206,6 +218,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x=0",
       color: "operation",
       action: "divide",
+      width: 1.25
     },
     {
       label: "0",
@@ -213,6 +226,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "→H",
       color: "numeric",
       action: "number-0",
+      width: 1.25
     },
     {
       label: ".",
@@ -220,6 +234,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "π",
       color: "numeric",
       action: "decimal-point",
+      width: 1.25
     },
     {
       label: "R/S",
@@ -227,6 +242,7 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "1/x",
       color: "function",
       action: "run-stop",
+      width: 1.25
     },
   ],
 ];

@@ -140,7 +140,7 @@ export default function Calculator() {
                     key={`${rowIndex}-${keyIndex}`}
                     color={key.color}
                     onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
-                    className=""
+                    className={key.width ? (typeof key.width === 'number' ? `col-span-${Math.round(key.width)}` : '') : ''}
                   >
                     {key.superLabel && (
                       <span className="key-superlabel">{key.superLabel}</span>
