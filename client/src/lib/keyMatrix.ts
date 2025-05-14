@@ -7,7 +7,9 @@ export interface CalculatorKey {
   superLabel?: string; // Label above the main label (typically f-shifted)
   subLabel?: string; // Label below the main label (typically g-shifted)
   color: KeyType; // Key color/type
-  action: string; // Action identifier
+  action: string; // Primary action identifier (unshifted)
+  superAction?: string; // f-shifted action identifier
+  subAction?: string; // g-shifted action identifier
   className?: string; // Optional CSS class
   width?: number; // Optional width (in grid columns)
 }
@@ -23,6 +25,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "BST",
       color: "function",
       action: "sst",
+      superAction: "fix",
+      subAction: "bst",
     },
     {
       superLabel: "SCI",
@@ -30,6 +34,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "RTN",
       color: "function",
       action: "gsb",
+      superAction: "sci",
+      subAction: "rtn",
     },
     {
       superLabel: "ENG",
@@ -37,6 +43,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "LBL",
       color: "function",
       action: "gto",
+      superAction: "eng",
+      subAction: "lbl",
     },
     { label: "f", color: "special", action: "shift-f" },
     { label: "g", color: "special", action: "shift-g" },
@@ -50,6 +58,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "%",
       color: "function",
       action: "swap-xy",
+      superAction: "mean",
+      subAction: "percentage",
     },
     {
       label: "R↓",
@@ -57,15 +67,31 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "i",
       color: "function",
       action: "roll-down",
+      superAction: "std-dev",
+      subAction: "i",
     },
-    { label: "STO", subLabel: "DSZ", color: "function", action: "store" },
-    { label: "RCL", subLabel: "ISZ", color: "function", action: "recall" },
+    { 
+      label: "STO", 
+      subLabel: "DSZ", 
+      color: "function", 
+      action: "store",
+      subAction: "dsz" 
+    },
+    { 
+      label: "RCL", 
+      subLabel: "ISZ", 
+      color: "function", 
+      action: "recall",
+      subAction: "isz" 
+    },
     {
       label: "Σ+",
       superLabel: "Σ-",
       subLabel: "DEL",
       color: "function",
       action: "sigma-plus",
+      superAction: "sigma-minus",
+      subAction: "delete",
     },
   ],
 
@@ -77,7 +103,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "",
       color: "operation",
       action: "enter",
-      width: 2
+      width: 2,
+      superAction: "prefix"
     },
     {
       label: "CHS",
@@ -85,6 +112,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "GRD",
       color: "operation",
       action: "chs",
+      superAction: "program",
+      subAction: "grad"
     },
     {
       label: "EEX",
@@ -92,6 +121,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "RAD",
       color: "function",
       action: "eex",
+      superAction: "register",
+      subAction: "rad"
     },
     {
       label: "CLx",
@@ -99,6 +130,8 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "DEG",
       color: "operation",
       action: "clear-x",
+      superAction: "sigma",
+      subAction: "deg"
     }
   ],
 
@@ -110,7 +143,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x<0",
       color: "operation",
       action: "subtract",
-      width: 1.25
+      width: 1.25,
+      superAction: "x-leq-y",
+      subAction: "x-lt-0"
     },
     {
       label: "7",
@@ -118,7 +153,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "eˣ",
       color: "numeric",
       action: "number-7",
-      width: 1.25
+      width: 1.25,
+      superAction: "ln",
+      subAction: "exp"
     },
     {
       label: "8",
@@ -126,7 +163,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "10ˣ",
       color: "numeric",
       action: "number-8",
-      width: 1.25
+      width: 1.25,
+      superAction: "log",
+      subAction: "power10"
     },
     {
       label: "9",
@@ -134,7 +173,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "→P",
       color: "numeric",
       action: "number-9",
-      width: 1.25
+      width: 1.25,
+      superAction: "to-rectangular",
+      subAction: "to-polar"
     },
   ],
 
@@ -146,7 +187,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x>0",
       color: "operation",
       action: "add",
-      width: 1.25
+      width: 1.25,
+      superAction: "x-gt-y",
+      subAction: "x-gt-0"
     },
     {
       label: "4",
@@ -154,7 +197,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "sin⁻¹",
       color: "numeric",
       action: "number-4",
-      width: 1.25
+      width: 1.25,
+      superAction: "sin",
+      subAction: "arcsin"
     },
     {
       label: "5",
@@ -162,7 +207,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "cos⁻¹",
       color: "numeric",
       action: "number-5",
-      width: 1.25
+      width: 1.25,
+      superAction: "cos",
+      subAction: "arccos"
     },
     {
       label: "6",
@@ -170,7 +217,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "tan⁻¹",
       color: "numeric",
       action: "number-6",
-      width: 1.25
+      width: 1.25,
+      superAction: "tan",
+      subAction: "arctan"
     },
   ],
 
@@ -182,7 +231,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x≠0",
       color: "operation",
       action: "multiply",
-      width: 1.25
+      width: 1.25,
+      superAction: "x-neq-y",
+      subAction: "x-neq-0"
     },
     {
       label: "1",
@@ -190,7 +241,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "FRAC",
       color: "numeric",
       action: "number-1",
-      width: 1.25
+      width: 1.25,
+      superAction: "int",
+      subAction: "frac"
     },
     {
       label: "2",
@@ -198,7 +251,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x²",
       color: "numeric",
       action: "number-2",
-      width: 1.25
+      width: 1.25,
+      superAction: "sqrt",
+      subAction: "square"
     },
     {
       label: "3",
@@ -206,7 +261,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "ABS",
       color: "numeric",
       action: "number-3",
-      width: 1.25
+      width: 1.25,
+      superAction: "y-to-x",
+      subAction: "abs"
     },
   ],
 
@@ -218,7 +275,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "x=0",
       color: "operation",
       action: "divide",
-      width: 1.25
+      width: 1.25,
+      superAction: "x-eq-y",
+      subAction: "x-eq-0"
     },
     {
       label: "0",
@@ -226,7 +285,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "→H",
       color: "numeric",
       action: "number-0",
-      width: 1.25
+      width: 1.25,
+      superAction: "to-hms",
+      subAction: "to-hours"
     },
     {
       label: ".",
@@ -234,7 +295,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "π",
       color: "numeric",
       action: "decimal-point",
-      width: 1.25
+      width: 1.25,
+      superAction: "last-x",
+      subAction: "pi"
     },
     {
       label: "R/S",
@@ -242,7 +305,9 @@ export const keyMatrix: CalculatorKey[][] = [
       subLabel: "1/x",
       color: "function",
       action: "run-stop",
-      width: 1.25
+      width: 1.25,
+      superAction: "pause",
+      subAction: "reciprocal"
     },
   ],
 ];
@@ -252,155 +317,12 @@ export function getKeyAction(
   key: CalculatorKey,
   shiftState: null | "f" | "g",
 ): string {
-  // Define shifted actions
-  if (shiftState === "f") {
-    // f-shifted actions (typically corresponding to superLabel)
-    switch (key.action) {
-      // Row 1
-      case "fix":
-        return "fix";
-      case "sci":
-        return "sci";
-      case "eng":
-        return "eng";
-
-      // Row 2
-      case "swap-xy":
-        return "mean";
-      case "roll-down":
-        return "std-dev";
-      case "sigma-plus":
-        return "sigma-minus";
-
-      // Row 3
-      case "enter":
-        return "prefix";
-      case "chs":
-        return "program";
-      case "eex":
-        return "register";
-      case "clear-x":
-        return "sigma";
-
-      // Row 4
-      case "subtract":
-        return "x-leq-y";
-      case "number-7":
-        return "ln";
-      case "number-8":
-        return "log";
-      case "number-9":
-        return "to-rectangular";
-
-      // Row 5
-      case "add":
-        return "x-gt-y";
-      case "number-4":
-        return "sin";
-      case "number-5":
-        return "cos";
-      case "number-6":
-        return "tan";
-
-      // Row 6
-      case "multiply":
-        return "x-neq-y";
-      case "number-1":
-        return "int";
-      case "number-2":
-        return "sqrt";
-      case "number-3":
-        return "y-to-x";
-
-      // Row 7
-      case "divide":
-        return "x-eq-y";
-      case "number-0":
-        return "to-hms";
-      case "decimal-point":
-        return "last-x";
-      case "run-stop":
-        return "pause";
-
-      default:
-        return key.action;
-    }
-  } else if (shiftState === "g") {
-    // g-shifted actions (typically corresponding to subLabel)
-    switch (key.action) {
-      // Row 1
-      case "fix":
-        return "sst";
-      case "sci":
-        return "gsb";
-      case "eng":
-        return "gto";
-
-      // Row 2
-      case "swap-xy":
-        return "percentage";
-      case "roll-down":
-        return "i";
-      case "store":
-        return "dsz";
-      case "recall":
-        return "isz";
-      case "sigma-plus":
-        return "delete";
-
-      // Row 3
-      case "chs":
-        return "grad";
-      case "eex":
-        return "rad";
-      case "clear-x":
-        return "deg";
-
-      // Row 4
-      case "subtract":
-        return "x-lt-0";
-      case "number-7":
-        return "exp";
-      case "number-8":
-        return "power10";
-      case "number-9":
-        return "to-polar";
-
-      // Row 5
-      case "add":
-        return "x-gt-0";
-      case "number-4":
-        return "arcsin";
-      case "number-5":
-        return "arccos";
-      case "number-6":
-        return "arctan";
-
-      // Row 6
-      case "multiply":
-        return "x-neq-0";
-      case "number-1":
-        return "frac";
-      case "number-2":
-        return "square";
-      case "number-3":
-        return "abs";
-
-      // Row 7
-      case "divide":
-        return "x-eq-0";
-      case "number-0":
-        return "to-hours";
-      case "decimal-point":
-        return "pi";
-      case "run-stop":
-        return "reciprocal";
-
-      default:
-        return key.action;
-    }
+  if (shiftState === "f" && key.superAction) {
+    return key.superAction;
+  } else if (shiftState === "g" && key.subAction) {
+    return key.subAction;
   }
-
-  // Otherwise return the default action
+  
+  // If no shift state or no specific action for the shift state, return the default action
   return key.action;
 }
