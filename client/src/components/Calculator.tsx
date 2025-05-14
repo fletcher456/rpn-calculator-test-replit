@@ -130,29 +130,48 @@ export default function Calculator() {
         
         {/* Calculator Keypad */}
         <div className={`calculator-keypad ${!isOn ? 'opacity-50 pointer-events-none' : ''}`}>
-          {/* Render keys from the keyMatrix */}
-          {keyMatrix.map((row, rowIndex) => (
+          {/* Render top 3 rows with normal 5-column grid */}
+          {keyMatrix.slice(0, 3).map((row, rowIndex) => (
             <div key={`row-${rowIndex}`} className="grid grid-cols-5 gap-2 sm:gap-3 mb-2">
-              {/* Map each row */}
+              {/* Map each key in top rows */}
               {row.map((key, keyIndex) => (
-                key.label !== "" ? (
-                  <CalculatorButton
-                    key={`${rowIndex}-${keyIndex}`}
-                    color={key.color}
-                    onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
-                    className={key.width ? (typeof key.width === 'number' ? `col-span-${Math.round(key.width)}` : '') : ''}
-                  >
-                    {key.superLabel && (
-                      <span className="key-superlabel">{key.superLabel}</span>
-                    )}
-                    <span className="key-label font-buttons font-bold">{key.label}</span>
-                    {key.subLabel && (
-                      <span className="key-sublabel">{key.subLabel}</span>
-                    )}
-                  </CalculatorButton>
-                ) : (
-                  <div key={`${rowIndex}-${keyIndex}`}></div> // Empty space for placeholder keys
-                )
+                <CalculatorButton
+                  key={`${rowIndex}-${keyIndex}`}
+                  color={key.color}
+                  onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
+                  className={key.width === 2 ? 'col-span-2' : ''}
+                >
+                  {key.superLabel && (
+                    <span className="key-superlabel">{key.superLabel}</span>
+                  )}
+                  <span className="key-label font-buttons font-bold">{key.label}</span>
+                  {key.subLabel && (
+                    <span className="key-sublabel">{key.subLabel}</span>
+                  )}
+                </CalculatorButton>
+              ))}
+            </div>
+          ))}
+          
+          {/* Render bottom 4 rows with equal width for all buttons */}
+          {keyMatrix.slice(3).map((row, rowIndex) => (
+            <div key={`row-${rowIndex + 3}`} className="grid grid-cols-4 gap-2 sm:gap-3 mb-2">
+              {/* Map each key in bottom rows with equal columns */}
+              {row.map((key, keyIndex) => (
+                <CalculatorButton
+                  key={`${rowIndex + 3}-${keyIndex}`}
+                  color={key.color}
+                  onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
+                  className="" // Grid handles equal sizing automatically
+                >
+                  {key.superLabel && (
+                    <span className="key-superlabel">{key.superLabel}</span>
+                  )}
+                  <span className="key-label font-buttons font-bold">{key.label}</span>
+                  {key.subLabel && (
+                    <span className="key-sublabel">{key.subLabel}</span>
+                  )}
+                </CalculatorButton>
               ))}
             </div>
           ))}
