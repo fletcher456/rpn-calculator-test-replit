@@ -94,6 +94,11 @@
   position: relative;
   overflow: hidden;
   transition: all 0.2s;
+  min-height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.25rem 0;
 }
 
 .calculator-button:active {
@@ -115,6 +120,25 @@
 
 .calculator-button:hover::after {
   opacity: 1;
+}
+
+.key-superlabel {
+  font-size: 0.6rem;
+  color: hsl(39, 100%, 70%); /* Amber/gold for f-shifted functions */
+  line-height: 1;
+  height: 0.6rem;
+}
+
+.key-label {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.key-sublabel {
+  font-size: 0.6rem;
+  color: hsl(210, 100%, 80%); /* Blue for g-shifted functions */
+  line-height: 1;
+  height: 0.6rem;
 }
 
 .led-glow {

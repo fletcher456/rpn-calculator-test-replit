@@ -129,23 +129,32 @@ export default function Calculator() {
         />
         
         {/* Calculator Keypad */}
-        <div className={`calculator-keypad grid grid-cols-5 gap-2 sm:gap-3 ${!isOn ? 'opacity-50 pointer-events-none' : ''}`}>
+        <div className={`calculator-keypad ${!isOn ? 'opacity-50 pointer-events-none' : ''}`}>
           {/* Render keys from the keyMatrix */}
           {keyMatrix.map((row, rowIndex) => (
-            // Map each row
-            row.map((key, keyIndex) => (
-              <CalculatorButton
-                key={`${rowIndex}-${keyIndex}`}
-                color={key.color}
-                onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
-                className={key.width ? `col-span-${key.width}` : ""}
-              >
-                <span className="key-label font-buttons font-bold">{key.label}</span>
-                {key.subLabel && (
-                  <span className="key-sublabel text-gray-300">{key.subLabel}</span>
-                )}
-              </CalculatorButton>
-            ))
+            <div key={`row-${rowIndex}`} className="grid grid-cols-5 gap-2 sm:gap-3 mb-2">
+              {/* Map each row */}
+              {row.map((key, keyIndex) => (
+                key.label !== "" ? (
+                  <CalculatorButton
+                    key={`${rowIndex}-${keyIndex}`}
+                    color={key.color}
+                    onClick={() => handleKeyAction(getKeyAction(key, shiftState))}
+                    className=""
+                  >
+                    {key.superLabel && (
+                      <span className="key-superlabel">{key.superLabel}</span>
+                    )}
+                    <span className="key-label font-buttons font-bold">{key.label}</span>
+                    {key.subLabel && (
+                      <span className="key-sublabel">{key.subLabel}</span>
+                    )}
+                  </CalculatorButton>
+                ) : (
+                  <div key={`${rowIndex}-${keyIndex}`}></div> // Empty space for placeholder keys
+                )
+              ))}
+            </div>
           ))}
         </div>
       </div>
