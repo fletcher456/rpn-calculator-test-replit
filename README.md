@@ -2,6 +2,8 @@
 
 A not-yet-faithful web-based recreation of the HP 29C RPN calculator with scientific functions and stack operations. I'm using this project to learn more about vibe coding.
 
+The keyboard layout is now accurate from a labeling perspective (though not yet from a semantic or display perspective). The labels on keys closely match the original HP 29C, though colors need to be adjusted, key actions need to be elaborated and properly implemented, and label appearances may need refinement. Switches are not yet fully correct, but the actual label strings are now quite close to the original!
+
 
 
 ## About the HP-29C
