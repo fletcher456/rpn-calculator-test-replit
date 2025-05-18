@@ -1,0 +1,259 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Calculator variables */
+:root {
+  --calculator-body: #1e3a57;
+  --display-bg: #193522;
+  --display-text: #88ff88;
+  --numeric-keys: #f0f1f7;
+  --function-keys: #735e54;
+  --operation-keys: #364ea5;
+  --special-keys: #ff9400;
+}
+
+/* Calculator container */
+.calculator-wrapper {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.calculator-body {
+  background-color: var(--calculator-body);
+  background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 75%, transparent 75%, transparent);
+  background-size: 4px 4px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  padding-bottom: 24px;
+}
+
+/* Calculator header */
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.calculator-branding .brand-title {
+  color: var(--special-keys);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.calculator-branding .brand-subtitle {
+  color: #a0a0a0;
+  font-size: 12px;
+}
+
+/* Power switch */
+.power-switch {
+  display: flex;
+  align-items: center;
+}
+
+.power-label {
+  color: #a0a0a0;
+  font-size: 12px;
+  margin: 0 8px;
+}
+
+.switch-track {
+  width: 40px;
+  height: 16px;
+  background-color: #4a4a4a;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.switch-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background-color: var(--special-keys);
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.switch-thumb.on {
+  transform: translateX(24px);
+}
+
+/* Calculator display */
+.calculator-display {
+  background-color: var(--display-bg);
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  font-family: "Courier New", monospace;
+  text-align: right;
+}
+
+.stack-display {
+  margin-bottom: 8px;
+}
+
+.stack-line {
+  color: var(--display-text);
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.stack-line:last-child {
+  margin-bottom: 0;
+}
+
+.x-register {
+  color: var(--display-text);
+  font-size: 20px;
+}
+
+.register-label {
+  float: left;
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 4px;
+}
+
+.register-value {
+  text-shadow: 0 0 5px rgba(136, 255, 136, 0.7);
+}
+
+/* Calculator keypad */
+.calculator-keypad {
+  display: grid;
+  gap: 8px;
+}
+
+.keypad-row {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Calculator button styles */
+.calculator-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.calculator-button:active {
+  transform: translateY(2px);
+  filter: brightness(0.9);
+}
+
+.calculator-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.calculator-button:hover::after {
+  opacity: 1;
+}
+
+/* Button colors */
+.numeric {
+  background-color: var(--numeric-keys);
+  color: #333;
+}
+
+.function {
+  background-color: var(--function-keys);
+  color: white;
+}
+
+.operation {
+  background-color: var(--operation-keys);
+  color: white;
+}
+
+.special {
+  background-color: var(--special-keys);
+  color: white;
+}
+
+/* Button labels */
+.key-superlabel {
+  font-size: 9.6px;
+  color: #ffcc66; /* Amber/gold for f-shifted functions */
+  line-height: 1;
+  height: 9.6px;
+}
+
+.key-label {
+  font-size: 14.4px;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.key-sublabel {
+  font-size: 9.6px;
+  color: #99ccff; /* Blue for g-shifted functions */
+  line-height: 1;
+  height: 9.6px;
+}
+
+/* Footer */
+.calculator-footer {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.footer-text {
+  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .calculator-button {
+    min-height: 48px;
+  }
+  
+  .key-label {
+    font-size: 12px;
+  }
+  
+  .key-superlabel, .key-sublabel {
+    font-size: 8px;
+    height: 8px;
+  }
+}
