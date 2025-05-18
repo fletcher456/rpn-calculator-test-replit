@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5500;
 
 // Serve static files from the root directory
 app.use(express.static(__dirname));
@@ -18,5 +18,6 @@ app.get('*', (req, res) => {
 
 // Start the server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Lite calculator server running on port ${PORT}`);
+  console.log(`Open http://localhost:${PORT} in your browser to view the calculator`);
 });
